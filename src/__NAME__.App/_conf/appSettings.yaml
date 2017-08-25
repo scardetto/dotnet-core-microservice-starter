@@ -1,0 +1,2 @@
+﻿DBConnectionString: "Data Source=localhost;Initial Catalog=__NAME__;Integrated Security=True"
+RabbitConnectionString: "amqps://cztxksbt:WPwjZsG0HEu-jKk3b__p8FNEi9_VmdlE@crocodile.rmq.cloudamqp.com/cztxksbt"

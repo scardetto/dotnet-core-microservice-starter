@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public class CustomJsonSerializer : JsonSerializer
     {

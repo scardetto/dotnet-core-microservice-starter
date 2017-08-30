@@ -4,8 +4,9 @@ using Nancy.Bootstrappers.StructureMap;
 using Nancy.Configuration;
 using Nancy.Diagnostics;
 using StructureMap;
+using __NAME__.App.Infrastructure.UnitOfWork;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public class NancyBootstrapper : StructureMapNancyBootstrapper
     {
@@ -35,8 +36,8 @@ namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
         protected override void RequestStartup(IContainer requestContainer, IPipelines pipelines, NancyContext context)
         {
             // Set up unit of work
-            pipelines.BeforeRequest += UnitOfWorkPipeline.BeforeRequest(requestContainer);
-            pipelines.AfterRequest += UnitOfWorkPipeline.AfterRequest();
+            pipelines.BeforeRequest += NancyUnitOfWorkPipeline.BeforeRequest(requestContainer);
+            pipelines.AfterRequest += NancyUnitOfWorkPipeline.AfterRequest();
 
             // Set up validation exception handling
             pipelines.OnError += HttpBadRequestPipeline.OnHttpBadRequest;

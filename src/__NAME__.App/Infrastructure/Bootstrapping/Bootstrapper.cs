@@ -6,23 +6,21 @@ using System.Xml;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Yaml;
-using Nancy.Extensions;
 using Rebus.Auditing.Messages;
 using Rebus.Config;
 using Rebus.Retry.Simple;
-using Rebus.Routing.TypeBased;
 using Rebus.StructureMap;
 using StructureMap;
-using __NAME__.App.Infrastructure.Bootstrapping.Nancy;
-using __NAME__.App.Infrastructure.Bootstrapping.Registries;
-using __NAME__.Messages.Examples;
+using __NAME__.App.Infrastructure.Config;
+using __NAME__.App.Infrastructure.Nancy;
+using __NAME__.App.Infrastructure.UnitOfWork;
 
 namespace __NAME__.App.Infrastructure.Bootstrapping
 {
     public static class Bootstrapper
     {
         public static string Environment { get; private set; }
-        public static AppConfiguration Configuration { get; private set; }
+        public static AppConfiguration Config { get; private set; }
         public static IContainer Container { get; private set; }
 
         public static void Bootstrap()
@@ -31,7 +29,7 @@ namespace __NAME__.App.Infrastructure.Bootstrapping
 
             InitLogging();
 
-            Configuration = InitConfiguration();
+            Config = InitConfiguration();
 
             Container = InitContainer();
 
@@ -81,7 +79,7 @@ namespace __NAME__.App.Infrastructure.Bootstrapping
                     s.LookForRegistries();
                 });
 
-                c.For<AppConfiguration>().Use(Configuration);
+                c.For<AppConfiguration>().Use(Config);
             });
 
             return container;
@@ -92,13 +90,17 @@ namespace __NAME__.App.Infrastructure.Bootstrapping
             // Start server bus
             Configure.With(new StructureMapContainerAdapter(Container))
                 .Options(c => c.LogPipeline(verbose: true))
-                .Transport(c => c.UseRabbitMq(Configuration.RabbitConnectionString, "__NAME__.input"))
+                .Transport(c => c.UseRabbitMq(Config.RabbitConnectionString, Config.Names.InputQueue))
                 .Logging(c => c.Log4Net())
-                .Routing(c => c.TypeBased().MapAssemblyOf<CloseExampleCommand>("__NAME__.input"))
-                .Options(c => c.EnableMessageAuditing("__NAME__.audit"))
+                .Options(c => c.EnableMessageAuditing(Config.Names.AuditQueue))
                 .Options(c => c.SimpleRetryStrategy(
                     maxDeliveryAttempts: 1,
-                    errorQueueAddress: "__NAME__.error"))
+                    errorQueueAddress: Config.Names.ErrorQueue))
+                .Options(c => c.EnableUnitOfWork(
+                    RebusUnitOfWorkPipeline.Create,
+                    RebusUnitOfWorkPipeline.Commit,
+                    RebusUnitOfWorkPipeline.Rollback,
+                    RebusUnitOfWorkPipeline.Dispose))
                 .Start()
                 ;
         }

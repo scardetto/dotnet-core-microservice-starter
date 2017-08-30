@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using FluentValidation.Results;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Validation;
 using Newtonsoft.Json;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public static class NancyExtensions
     {

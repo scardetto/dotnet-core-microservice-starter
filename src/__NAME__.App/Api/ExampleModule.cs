@@ -6,7 +6,7 @@ using Dapper;
 using Nancy;
 using Rebus.Bus;
 using __NAME__.App.Domain;
-using __NAME__.App.Infrastructure.Bootstrapping.Nancy;
+using __NAME__.App.Infrastructure.Nancy;
 using __NAME__.Messages.Examples;
 
 namespace __NAME__.App.Api

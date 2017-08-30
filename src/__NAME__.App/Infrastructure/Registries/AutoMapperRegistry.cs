@@ -2,7 +2,7 @@
 using AutoMapper;
 using StructureMap;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Registries
+namespace __NAME__.App.Infrastructure.Registries
 {
     public class AutoMapperRegistry : Registry
     {

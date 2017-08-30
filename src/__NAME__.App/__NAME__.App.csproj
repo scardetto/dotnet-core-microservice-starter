@@ -33,6 +33,8 @@
     <PackageReference Include="Rebus.Log4Net" Version="4.0.0" />
     <PackageReference Include="Rebus.Rabbitmq" Version="4.0.0" />
     <PackageReference Include="Rebus.StructureMap" Version="4.0.0-b03" />
+    <PackageReference Include="Rebus.TransactionScope" Version="3.0.0" />
+    <PackageReference Include="Rebus.UnitOfWork" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Nancy.Owin;
+using __NAME__.App.Infrastructure.Bootstrapping;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public class Startup
     {

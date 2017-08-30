@@ -2,12 +2,11 @@
 using Newtonsoft.Json;
 using Rebus.Handlers;
 using StructureMap;
-using __NAME__.App.Bus;
-using __NAME__.App.Infrastructure.Bootstrapping.Nancy;
+using __NAME__.App.Infrastructure.Bootstrapping;
 using __NAME__.App.Infrastructure.Diagnostics;
-using __NAME__.Messages.Examples;
+using __NAME__.App.Infrastructure.Nancy;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Registries
+namespace __NAME__.App.Infrastructure.Registries
 {
     public class AppRegistry : Registry
     {

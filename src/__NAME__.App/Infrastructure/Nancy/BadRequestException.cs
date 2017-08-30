@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public class BadRequestException : ApplicationException
     {

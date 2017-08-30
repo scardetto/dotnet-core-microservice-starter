@@ -2,7 +2,7 @@
 using Nancy;
 using Nancy.Responses;
 
-namespace __NAME__.App.Infrastructure.Bootstrapping.Nancy
+namespace __NAME__.App.Infrastructure.Nancy
 {
     public class HttpBadRequestPipeline
     {
